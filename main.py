@@ -59,19 +59,22 @@ def rotate_character(char, rot):
         return a
     else:
        return char 
-
+    
 @app.route("/", methods=['POST']) 
 def encrypt(text, rot):
     new_text = ""
     for char in text:
         new_char = rotate_character(char, rot)
         new_text += str(new_char)
-
     return '<h1>new_text</h1>'
+
 
 """ @app.route("/hello", methods=['POST'])
 def hello():
     first_name = request.form['first_name']
     return '<h1>Hello, ' + first_name +'</h1>'   """
+
+
+   
 app.run()  
 
