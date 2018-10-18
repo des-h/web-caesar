@@ -1,5 +1,5 @@
 from flask import Flask, request
-
+from caesar import rotate_character
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
@@ -42,13 +42,13 @@ def index():
     return form
 
 @app.route("/", methods=['POST']) 
-def alphabet_position(letter):
+def alphabet_position (letter):
     alphabet ="abcdefghijklmnopqrstuvwxyz" #Lists alphabet for a key
     lower_letter = letter.lower()   #Makes any input lowercase.
-    return alphabet.index(lower_letter) #Returns the position of input as a number.
+    return alphabet.index(lower_letter) #Returns the position of input as a number. 
 
-@app.route("/", methods=['POST'])  
-def rotate_character(char, rot):
+""" @app.route("/", methods=['POST'])  
+def rotate_character(char, rot):      #says already defined on line 2
     alphabet = "abcdefghijklmnopqrstuvwxyz"
     if char.isalpha():
         a = alphabet_position(char)
@@ -58,7 +58,7 @@ def rotate_character(char, rot):
             a = a.title()
         return a
     else:
-       return char 
+       return char  """
     
 @app.route("/", methods=['POST']) 
 def encrypt(text, rot):
