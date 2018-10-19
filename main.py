@@ -1,5 +1,6 @@
 from flask import Flask, request
 from caesar import rotate_character
+
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
@@ -8,19 +9,19 @@ form="""
  <html>
     <head>
         <style>
-            form {
+            form {{
                 background-color: #eee;
                 padding: 20px;
                 margin: 0 auto;
                 width: 540px;
                 font: 16px sans-serif;
                 border-radius: 10px;
-            }
-            textarea {
+            }}
+            textarea {{
                 margin: 10px 0;
                 width: 540px;
                 height: 120px;
-            }
+            }}
         </style>
     </head>
     <body>
@@ -30,25 +31,23 @@ form="""
      <input type="text" name="rot" value="0">
      <p class="error"></p>
      </div>
-     <textarea type="text" name="text">{0}</textarea>
+     <textarea type="text" name="text">Type your text here.</textarea>
      <br>
      <input type="submit">
     </form>
     </body>
 </html>
 """   
-@app.route("/")
-def index():
-    return form
+
 
 @app.route("/", methods=['POST']) 
-def alphabet_position (letter):
+def alphabet_position(letter):
     alphabet ="abcdefghijklmnopqrstuvwxyz" #Lists alphabet for a key
     lower_letter = letter.lower()   #Makes any input lowercase.
-    return alphabet.index(lower_letter) #Returns the position of input as a number. 
+    return alphabet.index(lower_letter) #Returns the position of input as a number.
 
 """ @app.route("/", methods=['POST'])  
-def rotate_character(char, rot):      #says already defined on line 2
+def rotate_character(char, rot):
     alphabet = "abcdefghijklmnopqrstuvwxyz"
     if char.isalpha():
         a = alphabet_position(char)
@@ -58,7 +57,7 @@ def rotate_character(char, rot):      #says already defined on line 2
             a = a.title()
         return a
     else:
-       return char  """
+       return char """ 
     
 @app.route("/", methods=['POST']) 
 def encrypt(text, rot):
@@ -66,8 +65,16 @@ def encrypt(text, rot):
     for char in text:
         new_char = rotate_character(char, rot)
         new_text += str(new_char)
-    return '<h1>new_text</h1>'
+    return '<h1>form.format(new_text)</h1>'
 
+@app.route("/", methods=['POST'])    
+def get_text(text): 
+    text=input("Type your text here.")
+    return text
+
+@app.route("/")
+def index():
+    return form.format("")
 
 """ @app.route("/hello", methods=['POST'])
 def hello():
