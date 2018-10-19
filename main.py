@@ -67,10 +67,10 @@ def encrypt(text, rot):
         new_text += str(new_char)
     return '<h1>form.format(new_text)</h1>'
 
-@app.route("/", methods=['POST'])    
+""" @app.route("/", methods=['POST'])    
 def get_text(text): 
     text=input("Type your text here.")
-    return text
+    return text """
 
 @app.route("/")
 def index():
