@@ -51,11 +51,11 @@ def alphabet_position (letter):
 
 @app.route("/", methods=['POST'])
 def encrypt(text, rot):
-   new_text = ""
+   text=input("Type your text here.")
    for char in text:
        new_char = rotate_character(char, rot)
-       new_text += str(new_char)
-   return '<h1>form.format(new_text)</h1>' 
+       text += str(new_char)
+   return '<h1>form.format(text)</h1>' 
 
 """ @app.route("/", methods=['POST'])
 def get_text(text):
