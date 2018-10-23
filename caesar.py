@@ -1,18 +1,38 @@
-import string
-from helpers import alphabet_position, rotate_character
-def encrypt(text, rot):
-    new_text = ""
+def alphabet_position(character):
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    lower = character.lower()
+    print(alphabet.index(lower))
+    return alphabet.index(lower)
+
+def rotate_string_13(text):
+
+    rotated = ''
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
     for char in text:
-        new_char = rotate_character(char, rot)
-        new_text += str(new_char)
+        rotated_idx = (alphabet_position(char) + 13) % 26
+        if char.isupper():
+            rotated = rotated + alphabet[rotated_idx].upper()
+        else:
+            rotated = rotated + alphabet[rotated_idx]
 
-    return new_text
+    return rotated
 
-def main():
-    input_text = ("Hello World!")
-    input_rot = 5
+def rotate_character(char, rot):
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    rotated_idx = (alphabet_position(char) + int(rot)) % 26
+    if char.isupper():
+        return alphabet[rotated_idx].upper()
+    else:
+        return alphabet[rotated_idx]
 
-    print(encrypt(input_text, input_rot))
+def rotate_string(text, rot):
 
-if __name__ == "__main__":
-     main()
+    rotated = ''
+    for char in text:
+        if (char.isalpha()):
+            rotated = rotated + rotate_character(char, rot)
+        else:
+            rotated = rotated + char
+
+    return rotated

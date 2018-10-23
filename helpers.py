@@ -7,7 +7,7 @@ def rotate_character(char, rot):
     alphabet = "abcdefghijklmnopqrstuvwxyz"
     if char.isalpha():
         a = alphabet_position(char)
-        a = (a + rot) % 26            #needs modulo
+        a = str((a + rot) % 26)            #needs modulo
         a = (alphabet[a])
         if char.isupper():
             a = a.title()

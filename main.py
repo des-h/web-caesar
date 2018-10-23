@@ -1,5 +1,5 @@
 from flask import Flask, request
-from caesar import rotate_character
+from caesar import rotate_string
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
@@ -30,18 +30,18 @@ form="""
     <input type="text" name="rot" value="0">
     <p class="error"></p>
     </div>
-    <textarea type="text" name="text">Type your text here.</textarea>
+    <textarea type="text" name="text">{0}</textarea>
     <br>
     <input type="submit">
    </form>
    </body>
 </html>
 """
-@app.route("/", methods=['POST'])
-def alphabet_position (letter):
-   alphabet ="abcdefghijklmnopqrstuvwxyz" #Lists alphabet for a key
-   lower_letter = letter.lower() #Makes any input lowercase.  
-   return alphabet.index(lower_letter) 
+
+# def alphabet_position (letter):
+#    alphabet ="abcdefghijklmnopqrstuvwxyz" #Lists alphabet for a key
+#    lower_letter = letter.lower() #Makes any input lowercase.  
+#    return alphabet.index(lower_letter) 
 
 """ def alphabet_position(letter):
    alphabet ="abcdefghijklmnopqrstuvwxyz" #Lists alphabet for a key
@@ -49,25 +49,30 @@ def alphabet_position (letter):
    for letter in alphabet:  
        return alphabet.index(lower_letter) #Returns the position of input as a number. """
 
-@app.route("/", methods=['POST'])
-def encrypt(text, rot):
-   text=input("Type your text here.")
+
+""" def encrypt(text, rot):
    for char in text:
+       print(char)
        new_char = rotate_character(char, rot)
        text += str(new_char)
-   return '<h1>form.format(text)</h1>' 
+   return "" """
 
 """ @app.route("/", methods=['POST'])
 def get_text(text):
    text=input("Type your text here.")
    return text """
 
+@app.route("/", methods=['POST'])
+def submission():
+  rot = request.form['rot']
+  text = request.form['text']
+  return form.format(rotate_string(text, rot))
 
 @app.route("/")
 def index():
    return form.format("")
 
-""" @app.route("/hello", methods=['POST'])
+""" @app.route("/hello", methods=['POST'])Con
 def hello():
    first_name = request.form['first_name']
    return '<h1>Hello, ' + first_name +'</h1>'   """
